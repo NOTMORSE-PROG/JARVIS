@@ -88,5 +88,3 @@ Jarvis is ready for Vercel!
     - Vercel will automatically detect `vercel.json` and set up the Cron Job to run every minute.
     - You can check the "Cron Jobs" tab in your Vercel deployment to verify.
 
-## Moving the Bot
-This folder is self-contained. You can move `jarvis/` to any other location or server. Just ensure Node.js is installed.
