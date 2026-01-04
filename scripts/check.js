@@ -2,8 +2,8 @@ require('dotenv').config();
 const config = require('../config.json');
 const monitor = require('../lib/monitor');
 
-// Run check for the last 10 minutes (covering the 5 min interval + buffer)
-const lookbackSeconds = 10 * 60;
+// Run check for the last 2 minutes (covering the 1 min interval + buffer)
+const lookbackSeconds = 2 * 60;
 
 console.log('Starting scheduled check...');
 monitor.run(config, lookbackSeconds)

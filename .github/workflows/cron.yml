@@ -2,7 +2,7 @@ name: Jarvis Cron
 
 on:
   schedule:
-    - cron: '*/5 * * * *' # Run every 5 minutes
+    - cron: '* * * * *' # Run every minute
   workflow_dispatch: # Allow manual trigger
 
 jobs:
