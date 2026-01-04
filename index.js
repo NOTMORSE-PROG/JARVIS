@@ -12,5 +12,6 @@ monitor.run(config, 60);
 // Schedule to run every minute (or as configured)
 const job = schedule.scheduleJob(`*/${config.checkInterval / 60} * * * *`, function(){
   console.log('Running scheduled check...');
-  monitor.run(config, config.checkInterval);
+  // Add 10s buffer to ensure we don't miss events at the boundary
+  monitor.run(config, config.checkInterval + 10);
 });
