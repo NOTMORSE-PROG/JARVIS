@@ -4,7 +4,7 @@
   "description": "A dynamic bot to monitor GitHub PRs, builds, and deployments.",
   "main": "index.js",
   "scripts": {
-    "start:local": "node index.js",
+    "start": "node index.js",
     "dev": "node index.js"
   },
   "dependencies": {
