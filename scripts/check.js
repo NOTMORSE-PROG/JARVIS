@@ -5,6 +5,19 @@ const monitor = require('../lib/monitor');
 const github = require('../lib/github');
 
 async function main() {
+  // Check for direct event payload (from repository_dispatch)
+  if (process.env.EVENT_PAYLOAD) {
+    try {
+      const payload = JSON.parse(process.env.EVENT_PAYLOAD);
+      await monitor.handlePayload(payload);
+      console.log('Payload processed successfully.');
+      process.exit(0);
+    } catch (error) {
+      console.error('Error processing payload:', error);
+      process.exit(1);
+    }
+  }
+
   console.log('Starting scheduled check...');
 
   // Default lookback: 10 minutes (if no previous run found)

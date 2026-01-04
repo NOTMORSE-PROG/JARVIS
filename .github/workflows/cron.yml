@@ -3,6 +3,8 @@ name: Jarvis Cron
 on:
   schedule:
     - cron: '* * * * *' # Run every minute
+  repository_dispatch:
+    types: [build_status]
   workflow_dispatch: # Allow manual trigger
 
 jobs:
@@ -18,3 +20,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          EVENT_PAYLOAD: ${{ toJson(github.event.client_payload) }}

@@ -80,3 +80,6 @@ For the bot to work, you need to add your secrets to the GitHub Repository:
 
 The bot will automatically start running on the schedule defined in `.github/workflows/cron.yml`.
 
+
+**Note:** You will need to create a Personal Access Token (PAT) with `repo` scope and add it as `JARVIS_ACCESS_TOKEN` to your repository secrets.
+
