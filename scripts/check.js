@@ -19,9 +19,11 @@ async function main() {
   if (process.env.EVENT_PAYLOAD) {
     try {
       const payload = JSON.parse(process.env.EVENT_PAYLOAD);
-      await monitor.handlePayload(payload);
-      console.log('Payload processed successfully.');
-      process.exit(0);
+      if (payload) {
+        await monitor.handlePayload(payload);
+        console.log('Payload processed successfully.');
+        process.exit(0);
+      }
     } catch (error) {
       console.error('Error processing payload:', error);
       process.exit(1);
