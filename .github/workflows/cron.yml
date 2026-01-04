@@ -4,15 +4,8 @@ on:
   schedule:
     - cron: '* * * * *' # Run every minute
   repository_dispatch:
-    types: [build_status]
+    types: [build_status, push, pull_request, create, delete]
   workflow_dispatch: # Allow manual trigger
-  push:
-    branches:
-      - '**'
-  pull_request:
-    types: [opened, closed, reopened, synchronize]
-  create: # Branch or tag creation
-  delete: # Branch or tag deletion
 
 jobs:
   check:
