@@ -6,6 +6,13 @@ on:
   repository_dispatch:
     types: [build_status]
   workflow_dispatch: # Allow manual trigger
+  push:
+    branches:
+      - '**'
+  pull_request:
+    types: [opened, closed, reopened, synchronize]
+  create: # Branch or tag creation
+  delete: # Branch or tag deletion
 
 jobs:
   check:
