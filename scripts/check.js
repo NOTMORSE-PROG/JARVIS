@@ -4,6 +4,16 @@ const monitor = require('../lib/monitor');
 
 const github = require('../lib/github');
 
+// Validate Environment Variables
+if (!process.env.GITHUB_TOKEN) {
+  console.error('❌ Error: GITHUB_TOKEN is missing. Please add it to Repository Secrets.');
+  process.exit(1);
+}
+if (!process.env.SLACK_WEBHOOK_URL) {
+  console.error('❌ Error: SLACK_WEBHOOK_URL is missing. Please add it to Repository Secrets.');
+  process.exit(1);
+}
+
 async function main() {
   // Check for direct event payload (from repository_dispatch)
   if (process.env.EVENT_PAYLOAD) {
