@@ -63,28 +63,20 @@ A dynamic bot to monitor GitHub repositories and notify Slack about:
 npm start
 ```
 
-## 🚀 Deploy to Vercel
+## 🚀 Deployment (GitHub Actions)
 
-Jarvis is ready for Vercel!
+Jarvis uses GitHub Actions to run checks every 10 minutes.
 
-1.  **Install Vercel CLI** (optional, or use the web dashboard):
-    ```bash
-    npm i -g vercel
-    ```
+### Setup Secrets
 
-2.  **Deploy**:
-    Run the following command in the `jarvis` directory:
-    ```bash
-    vercel
-    ```
-    - Follow the prompts.
-    - When asked "Want to modify these settings?", say **No**.
+For the bot to work, you need to add your secrets to the GitHub Repository:
 
-3.  **Environment Variables**:
-    - Go to your Vercel Project Dashboard > **Settings** > **Environment Variables**.
-    - Add `GITHUB_TOKEN` and `SLACK_WEBHOOK_URL` (copy them from your local `.env`).
+1.  Go to your repository on GitHub.
+2.  Click **Settings** > **Secrets and variables** > **Actions**.
+3.  Click **New repository secret**.
+4.  Add the following secrets:
+    -   `GH_TOKEN`: Your GitHub Personal Access Token (or use the default `GITHUB_TOKEN` if only accessing this repo).
+    -   `SLACK_WEBHOOK_URL`: Your Slack Webhook URL.
 
-4.  **Cron Jobs**:
-    - Vercel will automatically detect `vercel.json` and set up the Cron Job to run every minute.
-    - You can check the "Cron Jobs" tab in your Vercel deployment to verify.
+The bot will automatically start running on the schedule defined in `.github/workflows/cron.yml`.
 
