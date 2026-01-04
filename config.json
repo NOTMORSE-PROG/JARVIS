@@ -3,7 +3,8 @@
     {
       "owner": "NOTMORSE-PROG",
       "repo": "SafeTransit",
-      "branches": ["*"]
+      "branches": ["*"],
+      "workflows": ["Build and Release APK"]
     }
   ],
   "checkInterval": 60
