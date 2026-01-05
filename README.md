@@ -2,146 +2,102 @@
 
 A dynamic bot to monitor GitHub repositories and notify Slack about:
 - New Pull Requests
+- Push events and branch creation
 - Build Statuses (Success/Failure)
 - Deployments
 
+## Features
+
+- **Real-time Notifications**: Instant Slack alerts via GitHub webhooks
+- **Scheduled Monitoring**: Periodic checks via GitHub Actions (every 10 minutes)
+- **Multi-Repository Support**: Monitor multiple repos from a single instance
+- **Flexible Configuration**: Easy setup with environment variables and config files
+
 ## Setup
 
-1.  **Install Dependencies**:
-    ```bash
-    npm install
-    ```
-
-2.  **Configuration**:
-    - Copy `.env.example` to `.env`:
-      ```bash
-      cp .env.example .env
-      ```
-    - Edit `.env` and add your:
-        - `GITHUB_TOKEN`: A GitHub Personal Access Token.
-        - `SLACK_WEBHOOK_URL`: Your Slack Incoming Webhook URL.
-
-### 🔑 How to get the Tokens
-
-#### 1. GitHub Token (`GITHUB_TOKEN`)
-1.  Go to **GitHub Settings** > **Developer settings** > **Personal access tokens** > **Tokens (classic)**.
-2.  Click **Generate new token (classic)**.
-3.  Give it a name (e.g., "Jarvis Bot").
-4.  **Select Scopes**: Check `repo` (Full control of private repositories).
-5.  Click **Generate token**.
-6.  **Copy the token** immediately (starts with `ghp_...`).
-
-#### 2. Slack Webhook URL (`SLACK_WEBHOOK_URL`)
-1.  Go to [Slack API: Incoming Webhooks](https://api.slack.com/messaging/webhooks).
-2.  Click **Create your Slack app**.
-3.  Select **From scratch**, name it "Jarvis", and pick your workspace.
-4.  In the sidebar, click **Incoming Webhooks**.
-5.  Toggle **Activate Incoming Webhooks** to `On`.
-6.  Click **Add New Webhook to Workspace**.
-7.  Select the channel where you want notifications (e.g., `#general` or `#builds`).
-8.  Click **Allow**.
-9.  **Copy the Webhook URL** (starts with `https://hooks.slack.com/...`).
-
-3.  **Repositories**:
-    - Edit `config.json` to add/remove repositories to watch.
-    ```json
-    {
-      "repositories": [
-        {
-          "owner": "YourOrg",
-          "repo": "YourRepo",
-          "branches": ["main", "develop"]
-        }
-      ],
-      "checkInterval": 60
-    }
-    ```
-
-## Running
+### 1. Install Dependencies
 
 ```bash
-npm start
-# Jarvis Bot 🤖
+npm install
+```
 
-A dynamic bot to monitor GitHub repositories and notify Slack about:
-- New Pull Requests
-- Build Statuses (Success/Failure)
-- Deployments
+### 2. Configuration
 
-## Setup
+Copy `.env.example` to `.env`:
 
-1.  **Install Dependencies**:
-    ```bash
-    npm install
-    ```
+```bash
+cp .env.example .env
+```
 
-2.  **Configuration**:
-    - Copy `.env.example` to `.env`:
-      ```bash
-      cp .env.example .env
-      ```
-    - Edit `.env` and add your:
-        - `GITHUB_TOKEN`: A GitHub Personal Access Token.
-        - `SLACK_WEBHOOK_URL`: Your Slack Incoming Webhook URL.
+Edit `.env` and add your credentials:
+- `GITHUB_TOKEN`: GitHub Personal Access Token
+- `SLACK_WEBHOOK_URL`: Slack Incoming Webhook URL
 
-### 🔑 How to get the Tokens
+### 3. Configure Repositories
 
-#### 1. GitHub Token (`GITHUB_TOKEN`)
-1.  Go to **GitHub Settings** > **Developer settings** > **Personal access tokens** > **Tokens (classic)**.
-2.  Click **Generate new token (classic)**.
-3.  Give it a name (e.g., "Jarvis Bot").
-4.  **Select Scopes**: Check `repo` (Full control of private repositories).
-5.  Click **Generate token**.
-6.  **Copy the token** immediately (starts with `ghp_...`).
+Edit `config.json` to add/remove repositories to watch:
 
-#### 2. Slack Webhook URL (`SLACK_WEBHOOK_URL`)
-1.  Go to [Slack API: Incoming Webhooks](https://api.slack.com/messaging/webhooks).
-2.  Click **Create your Slack app**.
-3.  Select **From scratch**, name it "Jarvis", and pick your workspace.
-4.  In the sidebar, click **Incoming Webhooks**.
-5.  Toggle **Activate Incoming Webhooks** to `On`.
-6.  Click **Add New Webhook to Workspace`.
-7.  Select the channel where you want notifications (e.g., `#general` or `#builds`).
-8.  Click **Allow**.
-9.  **Copy the Webhook URL** (starts with `https://hooks.slack.com/...`).
-
-3.  **Repositories**:
-    - Edit `config.json` to add/remove repositories to watch.
-    ```json
+```json
+{
+  "repositories": [
     {
-      "repositories": [
-        {
-          "owner": "YourOrg",
-          "repo": "YourRepo",
-          "branches": ["main", "develop"]
-        }
-      ],
-      "checkInterval": 60
+      "owner": "YourOrg",
+      "repo": "YourRepo",
+      "branches": ["main", "develop"]
     }
-    ```
+  ],
+  "checkInterval": 60
+}
+```
 
-## Running
+## 🔑 Getting Your Tokens
+
+### GitHub Token (`GITHUB_TOKEN`)
+
+1. Go to **GitHub Settings** > **Developer settings** > **Personal access tokens** > **Tokens (classic)**
+2. Click **Generate new token (classic)**
+3. Give it a name (e.g., "Jarvis Bot")
+4. **Select Scopes**: Check `repo` (Full control of private repositories)
+5. Click **Generate token**
+6. **Copy the token** immediately (starts with `ghp_...`)
+
+### Slack Webhook URL (`SLACK_WEBHOOK_URL`)
+
+1. Go to [Slack API: Incoming Webhooks](https://api.slack.com/messaging/webhooks)
+2. Click **Create your Slack app**
+3. Select **From scratch**, name it "Jarvis", and pick your workspace
+4. In the sidebar, click **Incoming Webhooks**
+5. Toggle **Activate Incoming Webhooks** to `On`
+6. Click **Add New Webhook to Workspace**
+7. Select the channel where you want notifications (e.g., `#general` or `#builds`)
+8. Click **Allow**
+9. **Copy the Webhook URL** (starts with `https://hooks.slack.com/...`)
+
+## Running Locally
 
 ```bash
 npm start
 ```
 
-## 🚀 Deployment (GitHub Actions)
+## 🚀 Deployment with GitHub Actions
 
-Jarvis uses GitHub Actions to run checks every 10 minutes.
+Jarvis uses GitHub Actions to run scheduled checks every 10 minutes automatically.
 
-## ⚡ Instant Notifications Setup (For Any Repository)
+## ⚡ Instant Notifications Setup
 
-To make Jarvis monitor a new repository (e.g., `SafeTransit`, `AnotherApp`), follow these 3 steps:
+To enable real-time notifications for any repository you want to monitor, follow these steps:
 
 ### Step 1: Create the Secret
-1.  Go to your repository on GitHub.
-2.  **Settings** > **Secrets and variables** > **Actions** > **New repository secret**.
-3.  Name: `JARVIS_ACCESS_TOKEN`
-4.  Value: (Your Personal Access Token with `repo` scope)
 
-### Step 2: Add Instant Push & PR Notifications
-Create a new file in your repo at `.github/workflows/notify.yml` and paste this:
+1. Go to the repository you want to monitor on GitHub
+2. Navigate to **Settings** > **Secrets and variables** > **Actions**
+3. Click **New repository secret**
+4. Name: `JARVIS_ACCESS_TOKEN`
+5. Value: Your Personal Access Token with `repo` scope (same as your `GITHUB_TOKEN`)
+
+### Step 2: Add Push & PR Notifications
+
+Create a new file in your repository at `.github/workflows/notify.yml`:
 
 ```yaml
 name: Notify Jarvis
@@ -184,12 +140,13 @@ jobs:
             }
 ```
 
-### Step 3: Add Build Success Notifications
-To get notified when your **Build/APK** is ready, add this step to the **very end** of your existing build workflow (e.g., `build.yml`):
+### Step 3: Add Build Status Notifications
+
+To get notified when your builds complete, add this step to the **very end** of your existing build workflow (e.g., `build.yml`):
 
 ```yaml
-      - name: Trigger Jarvis
-        if: always() # Run even if build fails
+      - name: Notify Jarvis on Build Complete
+        if: always()
         uses: peter-evans/repository-dispatch@v2
         with:
           token: ${{ secrets.JARVIS_ACCESS_TOKEN }}
@@ -211,3 +168,16 @@ To get notified when your **Build/APK** is ready, add this step to the **very en
               }
             }
 ```
+
+## How It Works
+
+Jarvis operates in two modes:
+
+1. **Webhook Mode** (Instant): Repositories send events via `repository_dispatch` for immediate notifications
+2. **Polling Mode** (Scheduled): GitHub Actions run every 10 minutes to check for updates
+
+This hybrid approach ensures you get instant notifications when webhooks are configured, with a backup polling mechanism for comprehensive coverage.
+
+## License
+
+MIT
